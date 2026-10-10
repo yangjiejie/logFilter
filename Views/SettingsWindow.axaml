@@ -1,0 +1,129 @@
+<Window x:Class="LogFilterApp.Views.SettingsWindow"
+        xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:LogFilterApp.ViewModels"
+        Title="配置 — 模块映射 / 解析规则"
+        Width="1000" Height="700"
+        MinWidth="820" MinHeight="560"
+        WindowStartupLocation="CenterOwner"
+        Background="{DynamicResource BgWindow}">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <TabControl Grid.Row="0" Margin="8">
+
+            <!-- ================= 模块映射 ================= -->
+            <TabItem Header="模块映射">
+                <Grid ColumnDefinitions="300,4,*" Margin="4">
+                    <DockPanel Grid.Column="0">
+                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,6" Spacing="4">
+                            <Button Classes="small" Content="新增" Command="{Binding AddRuleCommand}" />
+                            <Button Classes="small" Content="删除" Command="{Binding RemoveRuleCommand}"
+                                    CommandParameter="{Binding SelectedRule}" />
+                        </StackPanel>
+                        <ListBox ItemsSource="{Binding Rules}"
+                                 SelectedItem="{Binding SelectedRule, Mode=TwoWay}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" FontSize="12" Padding="4,2" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </DockPanel>
+
+                    <GridSplitter Grid.Column="1" Background="{DynamicResource BorderWeak}" />
+
+                    <ScrollViewer Grid.Column="2">
+                        <StackPanel Margin="8,0" Spacing="10">
+                            <TextBlock Text="模块名" Classes="dim" />
+                            <TextBox Text="{Binding SelectedRule.Name}" />
+
+                            <TextBlock Text="路径前缀（一行一个，命中时取最长前缀）" Classes="dim" />
+                            <TextBox Text="{Binding SelectedRule.PatternsText}"
+                                     AcceptsReturn="True" TextWrapping="Wrap"
+                                     MinHeight="220" Classes="mono" />
+
+                            <TextBlock Text="示例：hot_fix/module/gameBC" Classes="dim" />
+
+                            <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,10,0,0">
+                                <Button Classes="toolbar" Content="导入 LogFilter.json"
+                                        Command="{Binding ImportFromFileCommand}" />
+                                <Button Classes="toolbar" Content="导出为 LogFilter.json"
+                                        Command="{Binding ExportToFileCommand}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+
+            <!-- ================= 解析规则 ================= -->
+            <TabItem Header="解析规则">
+                <ScrollViewer Margin="4">
+                    <StackPanel Margin="8" Spacing="8">
+                        <TextBlock Text="行首时间戳正则（命名组 t 为时间文本，用于切分日志条目）" Classes="dim" />
+                        <TextBox Text="{Binding TimePattern}" Classes="mono" />
+
+                        <TextBlock Text="堆栈行判定正则（用于识别哪些行属于堆栈）" Classes="dim" />
+                        <TextBox Text="{Binding StackLinePattern}" Classes="mono" />
+
+                        <TextBlock Text="符号行判定正则（已进入堆栈后，形如 命名空间.类:方法(参数) 的行）" Classes="dim" />
+                        <TextBox Text="{Binding StackMethodPattern}" Classes="mono" />
+
+                        <TextBlock Text="源码路径提取正则（一行一个，第 1 个分组为路径）" Classes="dim" />
+                        <TextBox Text="{Binding PathPatternsText}" AcceptsReturn="True" Classes="mono" MinHeight="90" />
+
+                        <TextBlock Text="跳过的堆栈行前缀（一行一个，例如封装的日志工具类）" Classes="dim" />
+                        <TextBox Text="{Binding SkipPrefixesText}" AcceptsReturn="True" Classes="mono" MinHeight="70" />
+
+                        <Grid ColumnDefinitions="*,*">
+                            <StackPanel Grid.Column="0" Spacing="8" Margin="0,0,8,0">
+                                <TextBlock Text="未匹配模块时的兜底模块名" Classes="dim" />
+                                <TextBox Text="{Binding UnknownModuleName}" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Spacing="8">
+                                <TextBlock Text="选项" Classes="dim" />
+                                <CheckBox Content="合并多行正文到同一条日志"
+                                          IsChecked="{Binding MergeMultilineMessage}" />
+                            </StackPanel>
+                        </Grid>
+
+                        <TextBlock Text="级别识别正则（一行一个，按 Assert &gt; Exception &gt; Error &gt; Warning 顺序匹配）"
+                                   Classes="dim" Margin="0,8,0,0" />
+
+                        <TextBlock Text="Exception" />
+                        <TextBox Text="{Binding ExceptionPatterns}" AcceptsReturn="True" Classes="mono" MinHeight="70" />
+
+                        <TextBlock Text="Assert" />
+                        <TextBox Text="{Binding AssertPatterns}" AcceptsReturn="True" Classes="mono" MinHeight="50" />
+
+                        <TextBlock Text="Error" />
+                        <TextBox Text="{Binding ErrorPatterns}" AcceptsReturn="True" Classes="mono" MinHeight="70" />
+
+                        <TextBlock Text="Warning" />
+                        <TextBox Text="{Binding WarningPatterns}" AcceptsReturn="True" Classes="mono" MinHeight="70" />
+
+                        <Button Classes="toolbar" Content="恢复默认解析规则"
+                                Command="{Binding ResetProfileCommand}" HorizontalAlignment="Left" />
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+
+        <!-- 底部 -->
+        <Border Grid.Row="1" Background="{DynamicResource BgToolbar}"
+                BorderBrush="{DynamicResource BorderWeak}" BorderThickness="0,1,0,0" Padding="8">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Spacing="6">
+                    <Button Classes="toolbar" Content="取消" Command="{Binding CancelCommand}" />
+                    <Button Classes="toolbar" Content="保存并应用" Command="{Binding SaveCommand}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="14" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding StatusText}" Classes="dim" VerticalAlignment="Center"
+                               TextTrimming="CharacterEllipsis" />
+                    <TextBlock Text="{Binding ConfigDir, StringFormat='配置目录：{0}'}" Classes="dim"
+                               VerticalAlignment="Center" Opacity="0.55" />
+                </StackPanel>
+            </DockPanel>
+        </Border>
+    </Grid>
+</Window>

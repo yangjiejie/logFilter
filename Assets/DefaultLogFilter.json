@@ -1,0 +1,31 @@
+{
+    "bc" :[
+		"hot_fix/ctrl/base/BcCtrl",
+		"hot_fix/module/gameBC",
+	  
+	],
+	"fruit" :[
+		"hot_fix/module/gameFruit",
+	],
+	"网络": [
+		"Runtime/Framework/Network",
+		"hot_fix/ctrl",
+		"hot_fix/manager/net"
+	],
+	"跑马灯":[
+		"hot_fix/module/hall/systemNotice/interface",
+		"hot_fix/module/ACommon/data/SystemNoticeData"
+	],
+	"系统mgr":[
+		"hot_fix/module/SystemMgr",
+	],
+	"gm" : [
+		"hot_fix/Gm"
+	],
+	"主界面" : [
+		"hot_fix/module/hall/main/interface"
+	],
+	"活动推送": [
+		"hot_fix/module/hall/main/help"
+	]
+}

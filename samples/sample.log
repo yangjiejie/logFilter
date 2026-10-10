@@ -1,0 +1,36 @@
+[10:12:31.004] 应用启动，进入大厅
+UnityEngine.Debug:Log(Object)
+HotFix.Module.Hall.Main.HallMainCtrl:Enter() (at Assets/hot_fix/module/hall/main/interface/HallMainCtrl.cs:88)
+
+[10:12:32.100] 收到网络消息 cmd=1001
+HotFix.UtilTool.CommonUtils:Log(String)
+HotFix.Ctrl.Base.BcCtrl:OnNet(Int32) (at Assets/hot_fix/ctrl/base/BcCtrl.cs:210)
+
+[10:12:33.220] NullReferenceException: Object reference not set to an instance of an object
+  at HotFix.Module.GameBC.GameBCCtrl:PlayCard () [0x00012] in <filename unknown>:0
+  at Assets/hot_fix/module/gameBC/GameBCCtrl.cs:321
+
+[10:12:34.010] [Error] 牌背资源加载失败，使用默认牌背兜底
+  at Assets/hot_fix/module/gameBC/GameBCCtrl.cs:44
+
+[10:12:34.500] 活动推送已更新
+  at Assets/hot_fix/module/hall/main/help/ActivityPush.cs:31
+
+[10:12:35.001] Warning: 跑马灯配置为空
+  at Assets/hot_fix/module/hall/systemNotice/interface/SystemNoticePanel.cs:76
+
+[10:12:35.900] fruit spin result = 7
+  at Assets/hot_fix/module/gameFruit/FruitCtrl.cs:120
+
+[10:12:36.300] gm command exec: addcoin 1000
+  at Assets/hot_fix/Gm/GmCtrl.cs:12
+
+[10:12:37.010] 断线重连成功
+  at Assets/Runtime/Framework/Network/NetMgr.cs:458
+
+[10:12:38.000] 这是一条没有堆栈的普通日志
+[10:12:38.500] 另一条普通日志，下面是一条多行日志
+[10:12:39.000] 多行日志第一行
+多行日志第二行（会被合并到同一条）
+多行日志第三行
+  at Assets/hot_fix/module/SystemMgr/SystemMgr.cs:20

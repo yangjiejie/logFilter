@@ -1,0 +1,87 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Styles.Resources>
+        <SolidColorBrush x:Key="BgWindow" Color="#FF1B1B1C" />
+        <SolidColorBrush x:Key="BgPanel" Color="#FF232324" />
+        <SolidColorBrush x:Key="BgToolbar" Color="#FF2A2A2C" />
+        <SolidColorBrush x:Key="BorderWeak" Color="#FF3A3A3E" />
+        <SolidColorBrush x:Key="TextDim" Color="#FF9A9A9F" />
+    </Styles.Resources>
+
+    <Style Selector="Button.toolbar">
+        <Setter Property="Padding" Value="10,5" />
+        <Setter Property="Margin" Value="0,0,6,0" />
+        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="Background" Value="#FF333337" />
+        <Setter Property="BorderBrush" Value="#FF4A4A50" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="FontSize" Value="12" />
+    </Style>
+    <Style Selector="Button.toolbar:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="#FF404046" />
+    </Style>
+
+    <Style Selector="Button.small">
+        <Setter Property="Padding" Value="6,3" />
+        <Setter Property="Margin" Value="0,0,4,0" />
+        <Setter Property="CornerRadius" Value="3" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="#FF4A4A50" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <Style Selector="ToggleButton.level">
+        <Setter Property="Padding" Value="8,4" />
+        <Setter Property="Margin" Value="0,0,4,0" />
+        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="#FF4A4A50" />
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="ToggleButton.level:checked /template/ ContentPresenter">
+        <Setter Property="Background" Value="#FF3A3D44" />
+    </Style>
+    <Style Selector="ToggleButton.level:unchecked">
+        <Setter Property="Opacity" Value="0.45" />
+    </Style>
+
+    <Style Selector="ToggleButton.stack">
+        <Setter Property="Padding" Value="5,2" />
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="CornerRadius" Value="3" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="#FF4A4A50" />
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="ToggleButton.stack:checked /template/ ContentPresenter">
+        <Setter Property="Background" Value="#FF3E5C3A" />
+    </Style>
+    <Style Selector="ToggleButton.stack:unchecked">
+        <Setter Property="Opacity" Value="0.5" />
+    </Style>
+
+    <Style Selector="TextBlock.dim">
+        <Setter Property="Foreground" Value="#FF9A9A9F" />
+        <Setter Property="FontSize" Value="11" />
+    </Style>
+
+    <Style Selector="TextBox.mono">
+        <Setter Property="FontFamily" Value="Consolas,Menlo,monospace" />
+        <Setter Property="FontSize" Value="11" />
+    </Style>
+
+    <Style Selector="ListBox.logs ListBoxItem">
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="MinHeight" Value="0" />
+    </Style>
+    <Style Selector="ListBox.logs ListBoxItem:selected /template/ ContentPresenter">
+        <Setter Property="Background" Value="#FF2F4A63" />
+    </Style>
+
+    <Style Selector="ListBox.tags ListBoxItem">
+        <Setter Property="Padding" Value="2,1" />
+        <Setter Property="MinHeight" Value="0" />
+    </Style>
+</Styles>
